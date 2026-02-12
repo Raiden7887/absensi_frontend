@@ -34,9 +34,15 @@ export default function Dashboard() {
             const history = res.data.data;
             setAttendance(history);
 
-            // Check today's status
-            const today = new Date().toISOString().slice(0, 10);
-            const todayEntry = history.find(a => a.date.startsWith(today));
+            // Check today's status (Using Local Time)
+            // 'en-CA' locale returns format YYYY-MM-DD
+            const todayDateLocal = new Date().toLocaleDateString('en-CA');
+
+            const todayEntry = history.find(a => {
+                // Konversi tanggal dari database ke lokal string YYYY-MM-DD juga
+                const recordDateLocal = new Date(a.date).toLocaleDateString('en-CA');
+                return recordDateLocal === todayDateLocal;
+            });
 
             if (todayEntry) {
                 if (todayEntry.check_out_time) {
