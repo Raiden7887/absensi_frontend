@@ -117,17 +117,30 @@ export default function AdminDashboard() {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{row.name}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row.department}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {new Date(row.date).toLocaleDateString()}
+                                            {new Date(row.date).toLocaleDateString('id-ID', {
+                                                day: 'numeric',
+                                                month: 'long',
+                                                year: 'numeric',
+                                                timeZone: 'Asia/Jakarta'
+                                            })}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {row.check_in_time ? new Date(row.check_in_time).toLocaleTimeString() : '-'}
+                                            {row.check_in_time ? new Date(row.check_in_time).toLocaleTimeString('id-ID', {
+                                                hour: '2-digit',
+                                                minute: '2-digit',
+                                                timeZone: 'Asia/Jakarta'
+                                            }) : '-'}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {row.check_out_time ? new Date(row.check_out_time).toLocaleTimeString() : '-'}
+                                            {row.check_out_time ? new Date(row.check_out_time).toLocaleTimeString('id-ID', {
+                                                hour: '2-digit',
+                                                minute: '2-digit',
+                                                timeZone: 'Asia/Jakarta'
+                                            }) : '-'}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${row.status === 'HADIR' ? 'bg-green-100 text-green-800' :
-                                                    row.status === 'TELAT' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'
+                                                row.status === 'TELAT' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'
                                                 }`}>
                                                 {row.status}
                                             </span>
